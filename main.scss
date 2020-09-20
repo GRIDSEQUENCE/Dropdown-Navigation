@@ -1,0 +1,142 @@
+// Reset
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+// Variables
+$color-pri: #0d1b2a;
+$color-priAcc: #778da9;
+$color-sec: #e0e1dd;
+$color-secAcc: #e64d39;
+$transition500: all 0.5s ease-in-out;
+
+// Mixin
+@mixin center($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+.container {
+  height: 100vh;
+  background: $color-pri;
+  @include center(column);
+}
+
+.nav {
+  width: 20%;
+
+  &__list,
+  &__listSub {
+    margin: 0;
+    padding: 0;
+    transition: $transition500;
+    overflow: hidden;
+  }
+
+  &__listSub {
+    max-height: 0;
+
+    &--show {
+      max-height: 100vh;
+    }
+  }
+
+  &__item,
+  &__itemSub {
+    padding-left: 20px;
+    list-style: none;
+    transition: $transition500;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 4px;
+      top: 0;
+      left: 0;
+      transition: $transition500;
+    }
+
+    &:hover {
+      &:before {
+        background: $color-secAcc;
+      }
+    }
+  }
+
+  &__itemSub {
+    transform: translateX(-100%);
+
+    &--slide {
+      transform: translateX(0);
+    }
+  }
+
+  &__arrow {
+    position: absolute;
+    display: block;
+    height: 10px;
+    width: 10px;
+    margin: 4px;
+    top: 0;
+    right: 20px;
+    border-right: 2px solid $color-sec;
+    border-bottom: 2px solid $color-sec;
+    transform: rotate(45deg);
+    transition: $transition500;
+    cursor: pointer;
+
+    &--rotate {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &__link,
+  &__linkSub {
+    color: $color-sec;
+    text-decoration: none;
+    font-size: 1rem;
+
+    &--sale {
+      color: $color-secAcc;
+      font-weight: bold;
+    }
+  }
+}
+
+.social {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+  top: 20px;
+  height: 35px;
+  width: 200px;
+  margin: 0 auto;
+
+  &__icon {
+    font-size: 1.5rem;
+    color: $color-priAcc;
+    transition: $transition500;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
